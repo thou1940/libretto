@@ -1,0 +1,32 @@
+.SUBCKT NOR2x1 A B VNW VSS Y
+MM2 VSS A Y VPW nmos_lvt l=20n nfin=2
+MM1 VSS B Y VPW nmos_lvt l=20n nfin=2
+MM4 net16 B Y VNW pmos_lvt l=20n nfin=2
+MM3 VDD A net16 VNW pmos_lvt l=20n nfin=2
+.ENDS
+
+
+.SUBCKT NOR2x2 A B VNW VSS Y
+MM2 VSS A Y VPW nmos_lvt l=20n nfin=4
+MM1 VSS B Y VPW nmos_lvt l=20n nfin=4
+MM4 net16 B Y VNW pmos_lvt l=20n nfin=4
+MM3 VDD A net16 VNW pmos_lvt l=20n nfin=4
+.ENDS
+
+
+.SUBCKT NOR2x3 A B VNW VSS Y
+MM2 VSS A Y VPW nmos_lvt l=20n nfin=6
+MM1 VSS B Y VPW nmos_lvt l=20n nfin=6
+MM4 net16 B Y VNW pmos_lvt l=20n nfin=6
+MM3 VDD A net16 VNW pmos_lvt l=20n nfin=6
+.ENDS
+
+
+.SUBCKT NOR2x4 A B VNW VSS Y
+MM2 VSS A Y VPW nmos_lvt l=20n nfin=8
+MM1 VSS B Y VPW nmos_lvt l=20n nfin=8
+MM4 net16 B Y VNW pmos_lvt l=20n nfin=8
+MM3 VDD A net16 VNW pmos_lvt l=20n nfin=8
+.ENDS
+
+

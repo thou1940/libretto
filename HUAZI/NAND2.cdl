@@ -1,0 +1,35 @@
+.SUBCKT NAND2x1 A B VNW VSS Y
+MM3 net16 A VSS VPW nmos_lvt l=20n nfin=2
+MM2 Y B net16 VPW nmos_lvt l=20n nfin=2
+MM1 Y B VDD VNW pmos_lvt l=20n nfin=2
+MM0 Y A VDD VNW pmos_lvt l=20n nfin=2
+.ENDS
+
+
+.SUBCKT NAND2x2 A B VNW VSS Y
+MM3 net16 A VSS VPW nmos_lvt l=20n nfin=4
+MM2 Y B net16 VPW nmos_lvt l=20n nfin=4
+MM1 Y B VDD VNW pmos_lvt l=20n nfin=4
+MM0 Y A VDD VNW pmos_lvt l=20n nfin=4
+.ENDS
+
+
+.SUBCKT NAND2x3 A B VNW VSS Y
+MM3 net16 A VSS VPW nmos_lvt l=20n nfin=6
+MM2 Y B net16 VPW nmos_lvt l=20n nfin=6
+MM1 Y B VDD VNW pmos_lvt l=20n nfin=6
+MM0 Y A VDD VNW pmos_lvt l=20n nfin=6
+.ENDS
+
+
+.SUBCKT NAND2x4 A B VNW VSS Y
+MM3 net16 A VSS VPW nmos_lvt l=20n nfin=8
+MM2 Y B net16 VPW nmos_lvt l=20n nfin=8
+MM1 Y B VDD VNW pmos_lvt l=20n nfin=8
+MM0 Y A VDD VNW pmos_lvt l=20n nfin=8
+.ENDS
+
+
+
+
+

@@ -1,0 +1,20 @@
+.SUBCKT OAI21x1 A1 A2 B VDD VSS Y
+MM2 Y B VDD VNW pmos_lvt l=20n nfin=2
+MM1 Y A2 net27 VNW pmos_lvt l=20n nfin=2
+MM0 net27 A1 VDD VNW pmos_lvt l=20n nfin=2
+MM6 net11 B VSS VPW nmos_lvt l=20n nfin=2
+MM5 Y A2 net11 VPW nmos_lvt l=20n nfin=2
+MM4 Y A1 net11 VPW nmos_lvt l=20n nfin=2
+.ENDS
+
+.SUBCKT OAI22x1 A1 A2 B1 B2 VDD VSS Y
+MM3 net3 B2 VSS VPW nmos_lvt l=20n nfin=2
+MM2 Y A2 net3 VPW nmos_lvt l=20n nfin=2
+MM1 net3 B1 VSS VPW nmos_lvt l=20n nfin=2
+MM0 Y A1 net3 VPW nmos_lvt l=20n nfin=2
+MM8 net13 A1 VDD VNW pmos_lvt l=20n nfin=2
+MM11 Y A2 net13 VNW pmos_lvt l=20n nfin=2
+MM6 net14 B1 VDD VNW pmos_lvt l=20n nfin=2
+MM10 Y B2 net14 VNW pmos_lvt l=20n nfin=2
+.ENDS
+
