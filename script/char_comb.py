@@ -425,17 +425,17 @@ def genFileLogic_trial1(targetLib, targetCell, targetHarness, meas_energy, cap_l
       elif(targetHarness.target_inport_val == "10"):
         outlines.append(".measure Tran PROP_IN_OUT trig v(VIN) VAL='"+str(targetLib.logic_high_to_low_threshold_voltage)+"' fall=1 \n")
       if(targetHarness.target_outport_val == "10"):
-        outlines.append("+ targ v(VOUT) val='"+str(targetLib.logic_high_to_low_threshold_voltage)+"' fall=1 \n")
+        outlines.append("+ targ v(VOUT) VAL='"+str(targetLib.logic_high_to_low_threshold_voltage)+"' fall=1 \n")
       elif(targetHarness.target_outport_val == "01"):
-        outlines.append("+ targ v(VOUT) val='"+str(targetLib.logic_low_to_high_threshold_voltage)+"' rise=1 \n")
+        outlines.append("+ targ v(VOUT) VAL='"+str(targetLib.logic_low_to_high_threshold_voltage)+"' rise=1 \n")
       outlines.append("* Trans delay \n")
  
       if(targetHarness.target_outport_val == "10"):
         outlines.append(".measure Tran TRANS_OUT trig v(VOUT) VAL='"+str(targetLib.logic_threshold_high_voltage)+"' fall=1\n")
-        outlines.append("+ targ v(VOUT) val='"+str(targetLib.logic_threshold_low_voltage)+"' fall=1 \n")
+        outlines.append("+ targ v(VOUT) VAL='"+str(targetLib.logic_threshold_low_voltage)+"' fall=1 \n")
       elif(targetHarness.target_outport_val == "01"):
         outlines.append(".measure Tran TRANS_OUT trig v(VOUT) VAL='"+str(targetLib.logic_threshold_low_voltage)+"' rise=1\n")
-        outlines.append("+ targ v(VOUT) val='"+str(targetLib.logic_threshold_high_voltage)+"' rise=1 \n")
+        outlines.append("+ targ v(VOUT) VAL='"+str(targetLib.logic_threshold_high_voltage)+"' rise=1 \n")
  
       # get ENERGY_START and ENERGY_END for energy calculation in 2nd round 
       if(meas_energy == 0):

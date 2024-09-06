@@ -188,6 +188,8 @@ def runSpiceFlopDelayMultiThread(targetLib, targetCell, targetHarness, spicef):
                                   tmp_min_hold, spicefrr))
       thread_setup.append(t1)
       t1.start()
+      with open('thread.txt', 'a', encoding='utf-8') as file:
+        file.write(f"id number: {threadid} |  \n")
 
   #-- join thread
   for t in thread_setup:
@@ -797,22 +799,36 @@ def holdSearchFlop(targetLib, targetCell, targetHarness, tmp_load, tmp_slope, \
   ## calculate whole slope length from logic threshold
   tmp_slope_mag = 1 / (targetLib.logic_threshold_high - targetLib.logic_threshold_low)
 
+  with open('hold_search.txt', 'a', encoding='utf-8') as file:
+    file.write(f"----------------------spicef: {spicef}-----------------------\n")
+    file.write(f"thold_lowest: {thold_lowest}\n")
+    file.write(f"thold_highest: {thold_highest}\n")
+    file.write(f"thold_tstep: {thold_tstep}\n")
+    file.write("---before---\n")
+
   #print ("debug "+str(thold_highest)+","+str(thold_lowest)+","+str(thold_tstep)+"\n\n")
 
   ###
-  #if (-thold_tstep>0):
-  #  if (thold_highest>thold_lowest):
-  #    thold_lowest = thold_highest 
-  #  thold_lowest += 1.1*thold_tstep
-  #else:
-  #  if (thold_highest<thold_lowest):
-  #    thold_lowest = thold_highest
-  #  thold_lowest -= 1.1*thold_tstep
+  if (-thold_tstep>0):
+   if (thold_highest>thold_lowest):
+     thold_lowest = thold_highest 
+   thold_lowest += 1.1*thold_tstep
+  else:
+   if (thold_highest<thold_lowest):
+     thold_lowest = thold_highest
+   thold_lowest -= 1.1*thold_tstep
+  with open('hold_search.txt', 'a', encoding='utf-8') as file:
+    file.write(f"thold_lowest: {thold_lowest}\n")
+    file.write(f"thold_highest: {thold_highest}\n")
+    file.write(f"thold_tstep: {thold_tstep}\n")
+    file.write("---after---\n") 
   #
   #  ##
   #for thold in np.arange (thold_highest, thold_lowest, -thold_tstep):
   #print("aaaa high/low/step="+str(thold_highest) + "/" + str(thold_lowest*1.01) + "/" + str(-thold_tstep))
   for thold in np.arange (thold_highest, thold_lowest*1.01, (-thold_tstep)):
+    with open('hold_search.txt', 'a', encoding='utf-8') as file:
+      file.write(f"thold: {thold}\n")    
     #print("aaaa thold="+str(thold))
     first_stage_fail = 0
     for j in range(len(tranmag)):
@@ -861,6 +877,8 @@ def holdSearchFlop(targetLib, targetCell, targetHarness, tmp_load, tmp_slope, \
           # if res_trans_out failed, it may failed in both run -> exit 
           if(res_trans_out == "failed"):
             first_stage_fail = 1
+      with open('hold_search.txt', 'a', encoding='utf-8') as file:
+        file.write(f"whether is success or failed: {first_stage_fail}\n")
 
     #  check second run of simulation
     # if (current D2Q > prev. D2Q), exceeds min D2Q
@@ -918,12 +936,17 @@ def holdSearchFlop(targetLib, targetCell, targetHarness, tmp_load, tmp_slope, \
       tmp_min_hold = float(res_hold)
       #targetLib.print_msg("tmp_min_hold: "+str(tmp_min_hold)+"\n")
     #targetLib.print_msg("spicef: "+str(spicef)+"\n")
+  return ( float(thold - thold_tstep), tmp_min_prop_in_out, tmp_min_prop_cin_out, \
+        tmp_min_setup, tmp_min_hold, tmp_min_trans_out, \
+        tmp_energy_start, tmp_energy_end, tmp_energy_clk_start, tmp_energy_clk_end, \
+        tmp_q_in_dyn, tmp_q_out_dyn, tmp_q_clk_dyn,  tmp_q_vdd_dyn, tmp_q_vss_dyn, \
+        tmp_i_in_leak, tmp_i_vdd_leak, tmp_i_vss_leak)  
 
   #print("bbbb high/low/tstep="+str(thold_highest) + "/" + str(thold_lowest*1.01) + "/" + str(-thold_tstep))
 
   # finish without premature ending
-  print("Error! End of dhold search!!: "+str(f'{thold:,.4f}'))
-  print("spice deck: "+spicefo)
+  print("Error! End of dhold search!!: "+str(f'{thold:,.4f}'+"\n"))
+  print("spice deck: "+spicefo +"\n")
   my_exit()
 
 def setupSearchFlop4timesSingle(pool_sema, threadid, targetLib, targetCell, targetHarness, load, slope, tsetup_lowest, tsetup_highest, min_hold, spicef):
@@ -1099,6 +1122,13 @@ def setupSearchFlop(targetLib, targetCell, targetHarness, tmp_load, tmp_slope, t
   ## calculate whole slope length from logic threshold
   tmp_slope_mag = 1 / (targetLib.logic_threshold_high - targetLib.logic_threshold_low)
 
+
+  with open('setup_search.txt', 'a', encoding='utf-8') as file:
+    file.write(f"----------------------spicef: {spicef}-----------------------\n")
+    file.write(f"tsetup_lowest: {tsetup_lowest}\n")
+    file.write(f"tsetup_highest: {tsetup_highest}\n")
+    file.write(f"tsetup_tstep: {tsetup_tstep}\n")
+    file.write("---before---\n")
   ##
   if (tsetup_tstep>0):
     if (tsetup_lowest>tsetup_highest):
@@ -1112,6 +1142,9 @@ def setupSearchFlop(targetLib, targetCell, targetHarness, tmp_load, tmp_slope, t
   ##
   for tsetup in np.arange (tsetup_lowest, tsetup_highest, tsetup_tstep):
   #for tsetup in np.arange (tsetup_lowest, tsetup_highest*1.01, tsetup_tstep):
+    
+    with open('setup_search.txt', 'a', encoding='utf-8') as file:
+      file.write(f"tsetup: {tsetup}\n")
     first_stage_fail = 0
     for j in range(len(tranmag)):
       if(first_stage_fail == 0):
@@ -1156,6 +1189,11 @@ def setupSearchFlop(targetLib, targetCell, targetHarness, tmp_load, tmp_slope, t
           ## if res_trans_out failed, it may failed in both run -> exit 
           if(res_trans_out == "failed"):
             first_stage_fail = 1
+
+            
+      with open('setup_search.txt', 'a', encoding='utf-8') as file:
+        file.write(f"whether is success or failed: {first_stage_fail}\n")
+  
 
     tmp_tsetup = tsetup - tsetup_tstep # restore previous tsetup 
 
@@ -1250,13 +1288,13 @@ def genFileFlop_trial1(targetLib, targetCell, targetHarness, sim_mode, cap_line,
       outlines.append(".param _vss = '"+str(targetLib.vss_voltage)+"*"+str(targetLib.voltage_mag)+"'\n")
       outlines.append(".param _vnw = '"+str(targetLib.nwell_voltage)+"*"+str(targetLib.voltage_mag)+"'\n")
       outlines.append(".param _vpw = '"+str(targetLib.pwell_voltage)+"*"+str(targetLib.voltage_mag)+"'\n")
-      outlines.append(".param cap = 10f \n")
-      outlines.append(".param slew = 100p \n")
-      outlines.append(".param cslew = 100p \n")
-      outlines.append(".param tunit = 100p \n")
-      outlines.append(".param tsetup = 100p \n")
-      outlines.append(".param thold = 100p \n")
-      outlines.append(".param tsimendmag = 100 tranmag = 1\n")
+      outlines.append(cap_line)
+      outlines.append(slew_line)
+      outlines.append(cslew_line)
+      outlines.append(tunit_line)
+      outlines.append(tsetup_line)
+      outlines.append(thold_line)
+      outlines.append(tsimend_line)
       outlines.append(".param _tslew = slew \n")
       
       #slope_max =0.5 * max(targetCell.slope)
@@ -1345,6 +1383,14 @@ def genFileFlop_trial1(targetLib, targetCell, targetHarness, sim_mode, cap_line,
       outlines.append(" \n")
       # target Vinput
       V_in_target = None 
+
+      # 这两行是用来输出关键波形的
+      if(sim_mode=="delay"):
+        outlines.append(".print tran v(VIN) v(VOUT) v(VCIN) \n")
+        outlines.append(".plot tran v(VIN) v(VOUT) v(VCIN) \n")
+      elif(sim_mode == "energy"):
+        outlines.append(".print tran v(VIN) v(VOUT) v(VCIN) i(VDD_DYN) i(VSS_DYN) i(VIN) \n")
+        outlines.append(".plot tran v(VIN) v(VOUT) v(VCIN) i(VDD_DYN) i(VSS_DYN) i(VIN) \n")
       
       # DATA
       if(targetHarness.target_inport_val == "01"):
@@ -1592,14 +1638,29 @@ def genFileFlop_trial1(targetLib, targetCell, targetHarness, sim_mode, cap_line,
         outlines.append(".measure Tran Q_VSS_DYN integ i(VSS_DYN) from='ENERGY_START' to='ENERGY_END*_Energy_meas_end_extent'  \n")
         outlines.append(" \n")
         outlines.append("* Leakage current \n")
+
+
+
+
+        
+        # 原本的代码，但是我觉得有问题，应该是保持输入和时钟都不变才行
         #outlines.append(".measure Tran I_VDD_LEAK avg i(VDD_DYN) from='_tstart1*0.1' to='_tstart1'  \n")
         #outlines.append(".measure Tran I_VSS_LEAK avg i(VSS_DYN) from='_tstart1*0.1' to='_tstart1'  \n")
-        outlines.append(".measure Tran I_VDD_LEAK avg i(VDD_DYN) from='_tclk5' to='_tstart1'  \n")
-        outlines.append(".measure Tran I_VSS_LEAK avg i(VSS_DYN) from='_tclk5' to='_tstart1'  \n")
+        # outlines.append(".measure Tran I_VDD_LEAK avg i(VDD_DYN) from='_tclk5' to='_tstart1'  \n")
+        # outlines.append(".measure Tran I_VSS_LEAK avg i(VSS_DYN) from='_tclk5' to='_tstart1'  \n")
+        # outlines.append(" \n")
+        # outlines.append("* Gate leak current \n")
+        # #outlines.append(".measure Tran I_IN_LEAK avg i(VIN) from='_tstart1*0.1' to='_tstart1'  \n")
+        # outlines.append(".measure Tran I_IN_LEAK avg i(VIN) from='_tclk5' to='_tstart1'  \n")
+
+        # 新写的，测量时钟和输入都不变的阶段，也就是最开始0到tclk1的时候
+        outlines.append(".measure Tran I_VDD_LEAK avg i(VDD_DYN) from='0' to='_tclk1'  \n")
+        outlines.append(".measure Tran I_VSS_LEAK avg i(VSS_DYN) from='0' to='_tclk1'  \n")
         outlines.append(" \n")
         outlines.append("* Gate leak current \n")
-        #outlines.append(".measure Tran I_IN_LEAK avg i(VIN) from='_tstart1*0.1' to='_tstart1'  \n")
-        outlines.append(".measure Tran I_IN_LEAK avg i(VIN) from='_tclk5' to='_tstart1'  \n")
+        outlines.append(".measure Tran I_IN_LEAK avg i(VIN) from='0' to='_tclk1'  \n")
+
+
       else:
         targetLib.print_error("Error, sim_mode should delay/energy/recovery/removal")
   
@@ -1692,21 +1753,22 @@ def genFileFlop_trial1(targetLib, targetCell, targetHarness, sim_mode, cap_line,
   
       outlines.append(".ends \n")
       outlines.append(" \n")
-      outlines.append(cap_line)
-      outlines.append(slew_line)
-      outlines.append(cslew_line)
-      outlines.append(tunit_line)
-      outlines.append(tsetup_line)
-      outlines.append(thold_line)
-      outlines.append(tsimend_line)
+#       outlines.append(cap_line)
+#       outlines.append(slew_line)
+#       outlines.append(cslew_line)
+#       outlines.append(tunit_line)
+#       outlines.append(tsetup_line)
+#       outlines.append(thold_line)
+#       outlines.append(tsimend_line)
           
-#### for ngspice batch mode 
-      outlines.append("*enable .control to show graph in ngspice \n")
-      outlines.append("*.control \n")
-      outlines.append("*run \n")
-      outlines.append("*plot V("+V_in_target+") V(VOUT) V(VCIN) \n")
-      outlines.append("*.endc \n")
-      outlines.append(".end \n") 
+# #### for ngspice batch mode 
+#       outlines.append("*enable .control to show graph in ngspice \n")
+#       outlines.append("*.control \n")
+#       outlines.append("*run \n")
+#       outlines.append("*plot V("+V_in_target+") V(VOUT) V(VCIN) \n")
+#       outlines.append("*.endc \n")
+#       outlines.append(".end \n") 
+
       f.writelines(outlines)
     f.close()
   
@@ -1748,7 +1810,7 @@ def genFileFlop_trial1(targetLib, targetCell, targetHarness, sim_mode, cap_line,
         inline = re.sub('\=',' ',inline)
       #targetLib.print_msg(inline)
       # search measure
-      if(not (re.search("warning*", inline)) and not (re.search("failed",inline)) and not (re.search("Error",inline))):
+      if(not (re.search("warning*", inline)) and not (re.search("FAILED",inline)) and not (re.search("failed",inline)) and not (re.search("Error",inline))):
         if(re.search("prop_in_out", inline, re.IGNORECASE)): 
           sparray = re.split(" +", inline) # separate words with spaces (use re.split)
           res_prop_in_out = "{:e}".format(float(sparray[2].strip()))
