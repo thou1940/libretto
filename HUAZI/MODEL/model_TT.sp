@@ -1,2 +1,2 @@
-.INC "SS/nmos.sp"
-.INC "SS/pmos.sp"
+.INC "TT/nmos.sp"
+.INC "TT/pmos.sp"

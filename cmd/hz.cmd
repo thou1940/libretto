@@ -80,10 +80,10 @@ add_netlist HUAZI/Sequential.cdl
 add_model HUAZI/MODEL/model_TT.sp
 add_simulation_setup_lowest -0.2
 add_simulation_setup_highest 0
-add_simulation_setup_timestep 0.001
+add_simulation_setup_timestep 0.002
 add_simulation_hold_lowest 0
 add_simulation_hold_highest 0.2
-add_simulation_hold_timestep 0.001
+add_simulation_hold_timestep 0.002
 
 
 characterize
