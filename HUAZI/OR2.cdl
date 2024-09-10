@@ -1,17 +1,17 @@
-.SUBCKT OR2x2 A B VNW VSS Y
-MM5 VSS net7 Y VPW nmos_lvt l=20n nfin=4
-MM1 VSS B net7 VPW nmos_lvt l=20n nfin=2
-MM2 VSS A net7 VPW nmos_lvt l=20n nfin=2
-MM0 VDD net7 Y VNW pmos_lvt l=20n nfin=4
-MM4 net15 B net7 VNW pmos_lvt l=20n nfin=2
-MM3 VDD A net15 VNW pmos_lvt l=20n nfin=2
+.SUBCKT OR2x2 A B VDD VSS Y
+MM5 VSS net7 Y VSS nmos_lvt l=20n nfin=4
+MM1 VSS B net7 VSS nmos_lvt l=20n nfin=2
+MM2 VSS A net7 VSS nmos_lvt l=20n nfin=2
+MM0 VDD net7 Y VDD pmos_lvt l=20n nfin=4
+MM4 net15 B net7 VDD pmos_lvt l=20n nfin=2
+MM3 VDD A net15 VDD pmos_lvt l=20n nfin=2
 .ENDS
 
-.SUBCKT OR2x4 A B VNW VSS Y
-MM8 VSS net031 Y VPW nmos_lvt l=20n nfin=8
-MM7 VSS B net031 VPW nmos_lvt l=20n nfin=2
-MM6 VSS A net031 VPW nmos_lvt l=20n nfin=2
-MM11 VDD A net035 VNW pmos_lvt l=20n nfin=2
-MM10 net035 B net031 VNW pmos_lvt l=20n nfin=2
-MM9 VDD net031 Y VNW pmos_lvt l=20n nfin=8
+.SUBCKT OR2x4 A B VDD VSS Y
+MM8 VSS net031 Y VSS nmos_lvt l=20n nfin=8
+MM7 VSS B net031 VSS nmos_lvt l=20n nfin=2
+MM6 VSS A net031 VSS nmos_lvt l=20n nfin=2
+MM11 VDD A net035 VDD pmos_lvt l=20n nfin=2
+MM10 net035 B net031 VDD pmos_lvt l=20n nfin=2
+MM9 VDD net031 Y VDD pmos_lvt l=20n nfin=8
 .ENDS

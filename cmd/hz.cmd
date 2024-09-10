@@ -35,8 +35,6 @@ set_slope slope1 {0.001204 0.0028 0.005992 0.012376 0.025116 0.050624 0.10164}
 set_load  load1 {0.000136 0.000315 0.000675 0.001396 0.002835 0.005712 0.011469} 
 set_slope slope2 {0.005992 0.012376 0.025116} 
 set_load  load2 {0.000675 0.001396 0.002835} 
-set_slope slope3 {4.9 0.7 0.1} 
-set_load  load3 {0.49 0.07 0.01} 
 # characterizer settings 
 set_work_dir work
 set_tmp_dir work
@@ -52,14 +50,14 @@ set_supress_debug_message true
 # initialize workspace
 initialize
 
-@REM ## add circuit
-@REM add_cell -n INVx1 -l INV -i A -o Y -f Y=!A 
-@REM add_slope slope1 
-@REM add_load  load1 
-@REM add_area 1
-@REM add_netlist HUAZI/INV.cdl
-@REM add_model HUAZI/MODEL/model_TT.sp
-@REM add_simulation_timestep auto slope1
+## add circuit
+add_cell -n INVx1 -l INV -i A -o Y -f Y=!A 
+add_slope slope1 
+add_load  load1
+add_area 1
+add_netlist HUAZI/INV.cdl
+add_model HUAZI/MODEL/model_TT.sp
+add_simulation_timestep auto slope1
 
 @REM ## add circuit
 @REM add_cell -n INVx2 -l INV -i A -o Y -f Y=!A 
@@ -70,20 +68,20 @@ initialize
 @REM add_model HUAZI/MODEL/model_TT.sp
 @REM add_simulation_timestep auto slope1
 
-## add circuit
-add_flop -n DFFHQx1 -l DFF_PCPU -i D -c CLK -o Q -q Q QN  -f Q=IQ QN=IQN
-add_slope slope2 
-add_load  load2  
-add_clock_slope auto slope1
-add_area 1
-add_netlist HUAZI/Sequential.cdl
-add_model HUAZI/MODEL/model_TT.sp
-add_simulation_setup_lowest -0.2
-add_simulation_setup_highest 0
-add_simulation_setup_timestep 0.002
-add_simulation_hold_lowest 0
-add_simulation_hold_highest 0.2
-add_simulation_hold_timestep 0.002
+@REM ## add circuit
+@REM add_flop -n DFFHQx1 -l DFF_PCPU -i D -c CLK -o Q -q Q QN  -f Q=IQ QN=IQN
+@REM add_slope slope2 
+@REM add_load  load2  
+@REM add_clock_slope auto slope1
+@REM add_area 1
+@REM add_netlist HUAZI/Sequential.cdl
+@REM add_model HUAZI/MODEL/model_TT.sp
+@REM add_simulation_setup_lowest -0.2
+@REM add_simulation_setup_highest 0
+@REM add_simulation_setup_timestep 0.002
+@REM add_simulation_hold_lowest 0
+@REM add_simulation_hold_highest 0.2
+@REM add_simulation_hold_timestep 0.002
 
 
 characterize

@@ -53,7 +53,7 @@ add_cell -n INVx1 -l INV -i A -o Y -f Y=!A
 add_slope slope1 
 add_load  load1 
 add_area 1
-add_netlist HUAZI/INVx1.cdl
+add_netlist HUAZI/INV.cdl
 add_model HUAZI/MODEL/model_TT.sp
 add_simulation_timestep auto slope1
 

@@ -1,46 +1,46 @@
-.SUBCKT INVx1 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=2
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=2
+.SUBCKT INVx1 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=2
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=2
 .ENDS
 
 
-.SUBCKT INVx2 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=4
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=4
+.SUBCKT INVx2 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=4
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=4
 .ENDS
 
 
-.SUBCKT INVx3 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=6
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=6
+.SUBCKT INVx3 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=6
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=6
 .ENDS
 
 
-.SUBCKT INVx4 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=8
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=8
+.SUBCKT INVx4 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=8
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=8
 .ENDS
 
 
-.SUBCKT INVx5 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=10
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=10
+.SUBCKT INVx5 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=10
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=10
 .ENDS
 
 
-.SUBCKT INVx6 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=12
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=12
+.SUBCKT INVx6 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=12
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=12
 .ENDS
 
 
-.SUBCKT INVx8 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=16
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=16
+.SUBCKT INVx8 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=16
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=16
 .ENDS
 
 
-.SUBCKT INVx12 A VDD VPW Y
-MM0 Y A VSS VPW nmos_lvt l=20n nfin=24
-MM1 Y A VDD VNW pmos_lvt l=20n nfin=24
+.SUBCKT INVx12 A VDD VSS Y
+MM0 Y A VSS VSS nmos_lvt l=20n nfin=24
+MM1 Y A VDD VDD pmos_lvt l=20n nfin=24
 .ENDS

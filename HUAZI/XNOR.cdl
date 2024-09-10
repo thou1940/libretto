@@ -1,28 +1,28 @@
-.SUBCKT XNOR2x1 A B VNW VSS Y
-MM4 net015 A VSS VPW nmos_lvt l=20n nfin=2
-MM5 net015 B VSS VPW nmos_lvt l=20n nfin=2
-MM6 Y net29 net015 VPW nmos_lvt l=20n nfin=2
-MM2 net29 B net43 VPW nmos_lvt l=20n nfin=2
-MM3 net43 A VSS VPW nmos_lvt l=20n nfin=2
-MM11 net041 A VDD VNW pmos_lvt l=20n nfin=2
-MM10 Y B net041 VNW pmos_lvt l=20n nfin=2
-MM9 Y net29 VDD VNW pmos_lvt l=20n nfin=2
-MM0 net29 A VDD VNW pmos_lvt l=20n nfin=2
-MM1 net29 B VDD VNW pmos_lvt l=20n nfin=2
+.SUBCKT XNOR2x1 A B VDD VSS Y
+MM4 net015 A VSS VSS nmos_lvt l=20n nfin=2
+MM5 net015 B VSS VSS nmos_lvt l=20n nfin=2
+MM6 Y net29 net015 VSS nmos_lvt l=20n nfin=2
+MM2 net29 B net43 VSS nmos_lvt l=20n nfin=2
+MM3 net43 A VSS VSS nmos_lvt l=20n nfin=2
+MM11 net041 A VDD VDD pmos_lvt l=20n nfin=2
+MM10 Y B net041 VDD pmos_lvt l=20n nfin=2
+MM9 Y net29 VDD VDD pmos_lvt l=20n nfin=2
+MM0 net29 A VDD VDD pmos_lvt l=20n nfin=2
+MM1 net29 B VDD VDD pmos_lvt l=20n nfin=2
 .ENDS
 
 
-.SUBCKT XNOR2x2 A B VNW VSS Y
-MM11 VSS A net047 VPW nmos_lvt l=20n nfin=2
-MM10 net047 B xor VPW nmos_lvt l=20n nfin=2
-MM9 VSS net036 xor VPW nmos_lvt l=20n nfin=2
-MM13 VSS xor Y VPW nmos_lvt l=20n nfin=4
-MM0 VSS A net036 VPW nmos_lvt l=20n nfin=2
-MM1 VSS B net036 VPW nmos_lvt l=20n nfin=2
-MM4 VDD A net019 VNW pmos_lvt l=20n nfin=2
-MM5 VDD B net019 VNW pmos_lvt l=20n nfin=2
-MM6 net019 net036 xor VNW pmos_lvt l=20n nfin=2
-MM12 VDD xor Y VNW pmos_lvt l=20n nfin=4
-MM2 net048 B net036 VNW pmos_lvt l=20n nfin=2
-MM3 VDD A net048 VNW pmos_lvt l=20n nfin=2
+.SUBCKT XNOR2x2 A B VDD VSS Y
+MM11 VSS A net047 VSS nmos_lvt l=20n nfin=2
+MM10 net047 B xor VSS nmos_lvt l=20n nfin=2
+MM9 VSS net036 xor VSS nmos_lvt l=20n nfin=2
+MM13 VSS xor Y VSS nmos_lvt l=20n nfin=4
+MM0 VSS A net036 VSS nmos_lvt l=20n nfin=2
+MM1 VSS B net036 VSS nmos_lvt l=20n nfin=2
+MM4 VDD A net019 VDD pmos_lvt l=20n nfin=2
+MM5 VDD B net019 VDD pmos_lvt l=20n nfin=2
+MM6 net019 net036 xor VDD pmos_lvt l=20n nfin=2
+MM12 VDD xor Y VDD pmos_lvt l=20n nfin=4
+MM2 net048 B net036 VDD pmos_lvt l=20n nfin=2
+MM3 VDD A net048 VDD pmos_lvt l=20n nfin=2
 .ENDS

@@ -37,43 +37,43 @@ library (OSU350_5P0V_25C){
     voltage : 5.0;
   }
   default_operating_conditions : TCCOM;
-  lu_table_template (constraint_template_slope1) {
+  lu_table_template (constraint_template_slope2) {
     variable_1 : constrained_pin_transition;
     variable_2 : related_pin_transition;
-    index_1 ("0.1, 0.7");
-    index_2 ("0.1, 0.7");
+    index_1 ("0.1, 0.7, 4.9");
+    index_2 ("0.1, 0.7, 4.9");
   }
-  lu_table_template (delay_template_load1_slope1) {
+  lu_table_template (delay_template_load2_slope2) {
     variable_1 : input_net_transition;
     variable_2 : total_output_net_capacitance;
-    index_1 ("0.1, 0.7");
-    index_2 ("0.01, 0.07");
+    index_1 ("0.1, 0.7, 4.9");
+    index_2 ("0.01, 0.07, 0.49");
   }
-  lu_table_template (recovery_template_slope1) {
+  lu_table_template (recovery_template_slope2) {
     variable_1 : related_pin_transition;    
     variable_2 : constrained_pin_transition;
-    index_1 ("0.1, 0.7");
-    index_2 ("0.1, 0.7");
+    index_1 ("0.1, 0.7, 4.9");
+    index_2 ("0.1, 0.7, 4.9");
   }
-  lu_table_template (removal_template_slope1) {
+  lu_table_template (removal_template_slope2) {
     variable_1 : related_pin_transition;    
     variable_2 : constrained_pin_transition;
-    index_1 ("0.1, 0.7");
-    index_2 ("0.1, 0.7");
+    index_1 ("0.1, 0.7, 4.9");
+    index_2 ("0.1, 0.7, 4.9");
   }
-  lu_table_template (mpw_constraint_template_slope1) {
+  lu_table_template (mpw_constraint_template_slope2) {
     variable_1 : constrained_pin_transition;
-    index_1 ("0.1, 0.7");
+    index_1 ("0.1, 0.7, 4.9");
   }
-  power_lut_template (passive_power_template_slope1) {
+  power_lut_template (passive_power_template_slope2) {
     variable_1 : input_transition_time;
-    index_1 ("0.1, 0.7");
+    index_1 ("0.1, 0.7, 4.9");
   }
-  power_lut_template (power_template_load1_slope1) {
+  power_lut_template (power_template_load2_slope2) {
     variable_1 : input_transition_time;
     variable_2 : total_output_net_capacitance;
-    index_1 ("0.1, 0.7");
-    index_2 ("0.01, 0.07");
+    index_1 ("0.1, 0.7, 4.9");
+    index_2 ("0.01, 0.07, 0.49");
   }
   input_voltage (default_VDD_VSS_input) {
     vil : 0.0;
@@ -87,8 +87,9 @@ library (OSU350_5P0V_25C){
     vomin : 0.0;
     vomax : 5.0;
   }
-  cell (DFF_1X) {
+  cell (INV_1X) {
     area : 1.0;
+    cell_leakage_power : 16.346316;
     pg_pin (VDD){
       pg_type : primary_power;
       voltage_name : "VDD";
@@ -97,135 +98,89 @@ library (OSU350_5P0V_25C){
       pg_type : primary_ground;
       voltage_name : "VSS";
     }
-    ff (Q,QN){
-    clocked_on : "CLK";
-    next_state : "DATA";
-    }
-    pin (CLK){
-      direction : input;
-      related_power_pin : "VDD";
-      related_ground_pin : "VSS";
-      max_transition : 0.7;
-      capacitance : "0.004070";
-      input_voltage : default_VDD_VSS_input;
-      clock : true;
-    }
-    pin (DATA){
-      direction : input;
-      related_power_pin : "VDD";
-      related_ground_pin : "VSS";
-      max_transition : 0.7;
-      capacitance : "0.000501";
-      input_voltage : default_VDD_VSS_input;
-      timing () {
-        related_pin : "CLK";
-        timing_type : "setup_rising";
-        rise_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "0.042812, 0.042812", \
-          "0.042812, 0.042812" \
-          );
-        }
-        fall_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "0.185938, 0.185938", \
-          "0.185938, 0.185938" \
-          );
-        }
-      }
-      timing () {
-        related_pin : "CLK";
-        timing_type : "hold_rising";
-        rise_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "-0.010000, -0.108437", \
-          "-0.010000, -0.108437" \
-          );
-        }
-        fall_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "-0.020937, 0.011875", \
-          "-0.020937, 0.011875" \
-          );
-        }
-      }
-    }
-    pin (Q){
+    pin (YB){
       direction : output;
-      function : "(IQ)"
+      function : "(!A)"
       related_power_pin : "VDD";
       related_ground_pin : "VSS";
-      max_capacitance : "0.07";
+      max_capacitance : "0.49";
       output_voltage : default_VDD_VSS_output;
       timing () {
-        related_pin : "CLK";
-        timing_type : "rising_edge";
-        timing_sense : "non_unate";
-        cell_rise (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        related_pin : "A";
+        timing_sense : "negative_unate";
+        timing_type : "combinational";
+        cell_fall (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.284122, 0.297195", \
-          "0.481456, 0.494296" \
+          "0.047625, 0.029565, -0.365218", \
+          "0.184567, 0.273537, 0.139061", \
+          "1.116271, 1.230090, 1.862330" \
           );
         }
-        rise_transition (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        fall_transition (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.074102, 0.074014", \
-          "0.375049, 0.375027" \
+          "0.053438, 0.198957, 0.943708", \
+          "0.220483, 0.377002, 1.405478", \
+          "1.520841, 1.523771, 2.608670" \
           );
         }
-        cell_fall (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        cell_rise (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.249064, 0.249303", \
-          "0.389100, 0.389295" \
+          "0.073757, 0.200612, 0.777732", \
+          "0.270489, 0.456559, 1.340220", \
+          "1.670232, 1.813239, 3.138337" \
           );
         }
-        fall_transition (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        rise_transition (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.056318, 0.055320", \
-          "0.226812, 0.226867" \
+          "0.068623, 0.184294, 0.801276", \
+          "0.370039, 0.446104, 1.263535", \
+          "2.555048, 2.546115, 3.086216" \
           );
         }
       }
       internal_power () {
-        related_pin : "CLK";
-        rise_power (power_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        related_pin : "A";
+        fall_power (power_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "1.535231, 2.447289" \
-          "3.003328, 3.913207" \
+          "0.015067, 0.463527, 4.183644" \
+          "0.031704, 0.268692, 3.701293" \
+          "0.038106, 0.062224, 2.244744" \
           );
         }
-        fall_power (power_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        rise_power (power_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "1.173623, 2.172824" \
-          "1.161075, 2.160553" \
+          "0.250144, 0.747727, 4.467532" \
+          "1.716411, 2.068831, 5.584625" \
+          "12.093592, 12.233247, 14.827250" \
           );
         }
       }
+    }
+    pin (A){
+      direction : input; 
+      related_power_pin : VDD;
+      related_ground_pin : VSS;
+      max_transition : 4.9;
+      capacitance : "0.005926";
+      input_voltage : default_VDD_VSS_input;
     }
   }
 }
-  cell (DFF_1X) {
+  cell (INV_1X) {
     area : 1.0;
+    cell_leakage_power : 16.346316;
     pg_pin (VDD){
       pg_type : primary_power;
       voltage_name : "VDD";
@@ -234,130 +189,83 @@ library (OSU350_5P0V_25C){
       pg_type : primary_ground;
       voltage_name : "VSS";
     }
-    ff (Q,QN){
-    clocked_on : "CLK";
-    next_state : "DATA";
-    }
-    pin (CLK){
-      direction : input;
-      related_power_pin : "VDD";
-      related_ground_pin : "VSS";
-      max_transition : 0.7;
-      capacitance : "0.004070";
-      input_voltage : default_VDD_VSS_input;
-      clock : true;
-    }
-    pin (DATA){
-      direction : input;
-      related_power_pin : "VDD";
-      related_ground_pin : "VSS";
-      max_transition : 0.7;
-      capacitance : "0.000501";
-      input_voltage : default_VDD_VSS_input;
-      timing () {
-        related_pin : "CLK";
-        timing_type : "setup_rising";
-        rise_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "0.042812, 0.042812", \
-          "0.042812, 0.042812" \
-          );
-        }
-        fall_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "0.185938, 0.185938", \
-          "0.185938, 0.185938" \
-          );
-        }
-      }
-      timing () {
-        related_pin : "CLK";
-        timing_type : "hold_rising";
-        rise_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "-0.010000, -0.108437", \
-          "-0.010000, -0.108437" \
-          );
-        }
-        fall_constraint (constraint_template_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
-          values ( \
-          "-0.020937, 0.011875", \
-          "-0.020937, 0.011875" \
-          );
-        }
-      }
-    }
-    pin (Q){
+    pin (YB){
       direction : output;
-      function : "(IQ)"
+      function : "(!A)"
       related_power_pin : "VDD";
       related_ground_pin : "VSS";
-      max_capacitance : "0.07";
+      max_capacitance : "0.49";
       output_voltage : default_VDD_VSS_output;
       timing () {
-        related_pin : "CLK";
-        timing_type : "rising_edge";
-        timing_sense : "non_unate";
-        cell_rise (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        related_pin : "A";
+        timing_sense : "negative_unate";
+        timing_type : "combinational";
+        cell_fall (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.284122, 0.297195", \
-          "0.481456, 0.494296" \
+          "0.047625, 0.029565, -0.365218", \
+          "0.184567, 0.273537, 0.139061", \
+          "1.116271, 1.230090, 1.862330" \
           );
         }
-        rise_transition (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        fall_transition (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.074102, 0.074014", \
-          "0.375049, 0.375027" \
+          "0.053438, 0.198957, 0.943708", \
+          "0.220483, 0.377002, 1.405478", \
+          "1.520841, 1.523771, 2.608670" \
           );
         }
-        cell_fall (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        cell_rise (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.249064, 0.249303", \
-          "0.389100, 0.389295" \
+          "0.073757, 0.200612, 0.777732", \
+          "0.270489, 0.456559, 1.340220", \
+          "1.670232, 1.813239, 3.138337" \
           );
         }
-        fall_transition (delay_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        rise_transition (delay_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "0.056318, 0.055320", \
-          "0.226812, 0.226867" \
+          "0.068623, 0.184294, 0.801276", \
+          "0.370039, 0.446104, 1.263535", \
+          "2.555048, 2.546115, 3.086216" \
           );
         }
       }
       internal_power () {
-        related_pin : "CLK";
-        rise_power (power_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        related_pin : "A";
+        fall_power (power_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "1.535231, 2.447289" \
-          "3.003328, 3.913207" \
+          "0.015067, 0.463527, 4.183644" \
+          "0.031704, 0.268692, 3.701293" \
+          "0.038106, 0.062224, 2.244744" \
           );
         }
-        fall_power (power_template_load1_slope1) {
-          index_1("0.1, 0.7");
-          index_2("0.01, 0.07");
+        rise_power (power_template_load2_slope2) {
+          index_1("0.1, 0.7, 4.9");
+          index_2("0.01, 0.07, 0.49");
           values ( \
-          "1.173623, 2.172824" \
-          "1.161075, 2.160553" \
+          "0.250144, 0.747727, 4.467532" \
+          "1.716411, 2.068831, 5.584625" \
+          "12.093592, 12.233247, 14.827250" \
           );
         }
       }
+    }
+    pin (A){
+      direction : input; 
+      related_power_pin : VDD;
+      related_ground_pin : VSS;
+      max_transition : 4.9;
+      capacitance : "0.005926";
+      input_voltage : default_VDD_VSS_input;
     }
   }
 }

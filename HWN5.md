@@ -25,59 +25,41 @@
 
 \newpage 
 # Cell settings 
-## Cell : DFFHQx1 
+## Cell : INVx1 
 ### Basics
 | name | type | code | area | leak |
 |----|----|----|----|----|
-| DFFHQx1 | Sequential | DFF_PCPU | 1.0 | 5168.623200 |
+| INVx1 | Combinational | INV | 1.0 | 8418.897500 |
 
-### Clock pin : CLK
+### Input pin : A
 | direction | related pwr pin | related gnd pin | max trans | cap. |
 |----|----|----|----|----|
-| input | VDD | VSS | 0.025116 | 0.000274 |
+| input | VDD | VSS | 0.10164 | 0.002717 |
 
-### Input pin : D
-| direction | related pwr pin | related gnd pin | max trans | cap. |
-|----|----|----|----|----|
-| input | VDD | VSS | 0.025116 | 0.000028 |
-
-| direction | setup min. | setup center | setup max |
-|----|----|----|----|
-|rise_constraint|0.012378 | 0.012378 | 0.012378 |
-|fall_constraint|0.096520 | 0.096520 | 0.096520 |
-
-| direction | hold min. | hold center | hold max |
-|----|----|----|----|
-|rise_constraint|-0.005340 | -0.002720 | -0.001100 |
-|fall_constraint|-0.013199 | -0.010579 | -0.007960 |
-
-### Output pin : Q
+### Output pin : Y
 | direction | func | max cap | leak | 
 |----|----|----|----|
-| output | IQ | 0.002835 | 5168.623200 |
+| output | !A | 0.011469 | 8418.897500 |
 
-#### related pin : CLK
+#### related pin : A
 | related pin | func | max cap |
 |----|----|----|
-| CLK | IQ | 0.002835 |
+|A|!A | 0.011469 |
 
 | direction | prop min. | prop center | prop max |
 |----|----|----|----|
-|cell_rise|0.016160 | 0.018745 | 0.023034 |
-|cell_fall|0.157598 | 0.169618 | 0.180776 |
+|cell_fall|0.001217 | 0.004497 | 0.024831 |
+|cell_rise|0.001200 | 0.003860 | 0.022410 |
 
 | direction | tran min. | tran center | tran max |
 |----|----|----|----|
-|rise_transition|0.001951 | 0.003509 | 0.006777 |
-|fall_transition|0.008462 | 0.010461 | 0.013875 |
+|fall_transition|0.000388 | 0.002660 | 0.015961 |
+|rise_transition|0.000363 | 0.002644 | 0.015955 |
 
 | direction | eintl min. | eintl center | eintl max |
 |----|----|----|----|
-|rise_power|0.001374 | 0.001699 | 0.002320 |
-|fall_power|0.001518 | 0.001550 | 0.001551 |
+|fall_power|0.000040 | 0.000316 | 0.002959 |
+|rise_power|0.000002 | 0.001321 | 0.006962 |
 
-| direction | ein min. | ein center | ein max |
-|----|----|----|----|
-|rise_power|0.000013 | 0.000013 | 0.000021 |
 
 \newpage 

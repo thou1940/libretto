@@ -41,7 +41,7 @@ set_load  load3 {0.49 0.07 0.01}
 set_work_dir work
 set_tmp_dir work
 set_tmp_file _tmp__
-set_simulator ngspice
+set_simulator Xyce
 set_run_sim true
 set_mt_sim true
 set_sim_nice 19
@@ -52,29 +52,29 @@ set_supress_debug_message true
 # initialize workspace
 initialize
 
-@REM ## add circuit
-@REM add_cell -n INV_1X -l INV -i A -o YB -f YB=!A 
-@REM add_slope slope2 
-@REM add_load  load2  
-@REM add_area 1
-@REM add_netlist OSU350/NETLIST/INV_1X.spi
-@REM add_model OSU350/MODEL/model_OSU350_25C_TT.sp
-@REM add_simulation_timestep auto slope1
-@REM characterize
-@REM export
-
-add_flop -n DFF_1X -l DFF_PCPU -i DATA -c CLK -o Q -q Q QN -f Q=IQ QN=IQN 
-add_slope slope1 
-add_load  load1  
-add_clock_slope auto slope1
+## add circuit
+add_cell -n INV_1X -l INV -i A -o YB -f YB=!A 
+add_slope slope2 
+add_load  load2  
 add_area 1
-add_netlist OSU350/NETLIST/DFF_1X.spi
+add_netlist OSU350/NETLIST/INV_1X.spi
 add_model OSU350/MODEL/model_OSU350_25C_TT.sp
 add_simulation_timestep auto slope1
-add_simulation_setup_auto slope1
-add_simulation_hold_auto slope1
 characterize
 export
+
+@REM add_flop -n DFF_1X -l DFF_PCPU -i DATA -c CLK -o Q -q Q QN -f Q=IQ QN=IQN 
+@REM add_slope slope1 
+@REM add_load  load1  
+@REM add_clock_slope auto slope1
+@REM add_area 1
+@REM add_netlist OSU350/NETLIST/DFF_1X.spi
+@REM add_model OSU350/MODEL/model_OSU350_25C_TT.sp
+@REM add_simulation_timestep auto slope1
+@REM add_simulation_setup_auto slope1
+@REM add_simulation_hold_auto slope1
+@REM characterize
+@REM export
 
 
 exit
