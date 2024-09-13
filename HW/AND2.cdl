@@ -1,0 +1,28 @@
+.SUBCKT AND2x2 A B VDD VSS Y
+MM4 Y net10 VDD VDD pmos_lvt l=20n nfin=4
+MM1 net10 B VDD VDD pmos_lvt l=20n nfin=2
+MM0 net10 A VDD VDD pmos_lvt l=20n nfin=2
+MM5 Y net10 VSS VSS nmos_lvt l=20n nfin=4
+MM3 net20 A VSS VSS nmos_lvt l=20n nfin=2
+MM2 net10 B net20 VSS nmos_lvt l=20n nfin=2
+.ENDS
+
+
+.SUBCKT AND2x4 A B VDD VSS Y
+MM4 Y net9 VDD VDD pmos_lvt l=20n nfin=8
+MM1 net9 B VDD VDD pmos_lvt l=20n nfin=4
+MM0 net9 A VDD VDD pmos_lvt l=20n nfin=4
+MM5 Y net9 VSS VSS nmos_lvt l=20n nfin=8
+MM3 net19 A VSS VSS nmos_lvt l=20n nfin=4
+MM2 net9 B net19 VSS nmos_lvt l=20n nfin=4
+.ENDS
+
+
+.SUBCKT AND2x6 A B VDD VSS Y
+MM4 Y net9 VDD VDD pmos_lvt l=20n nfin=12
+MM1 net9 B VDD VDD pmos_lvt l=20n nfin=4
+MM0 net9 A VDD VDD pmos_lvt l=20n nfin=4
+MM5 Y net9 VSS VSS nmos_lvt l=20n nfin=12
+MM3 net19 A VSS VSS nmos_lvt l=20n nfin=4
+MM2 net9 B net19 VSS nmos_lvt l=20n nfin=4
+.ENDS

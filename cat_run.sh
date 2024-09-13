@@ -1,1 +1,1 @@
-cat work/_tmp__ >> HWN5.lib 
+cat work/_tmp__ >> OSU350_5P0V_25C.lib 

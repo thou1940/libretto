@@ -1,0 +1,50 @@
+.SUBCKT OA21x1 A1 A2 B VDD VSS Y
+MM11 Y net041 VSS VSS nmos_lvt l=20n nfin=2
+MM9 net041 A2 net042 VSS nmos_lvt l=20n nfin=2
+MM10 net041 A1 net042 VSS nmos_lvt l=20n nfin=2
+MM6 net042 B VSS VSS nmos_lvt l=20n nfin=2
+MM15 VDD A2 net046 VDD pmos_lvt l=20n nfin=2
+MM14 VDD B net041 VDD pmos_lvt l=20n nfin=2
+MM13 net046 A1 net041 VDD pmos_lvt l=20n nfin=2
+MM12 Y net041 VDD VDD pmos_lvt l=20n nfin=2
+.ENDS
+
+
+.SUBCKT OA21x2 A1 A2 B VDD VSS Y
+MM3 Y net25 VDD VDD pmos_lvt l=20n nfin=4
+MM2 net25 B VDD VDD pmos_lvt l=20n nfin=2
+MM1 net25 A2 net27 VDD pmos_lvt l=20n nfin=2
+MM0 net27 A1 VDD VDD pmos_lvt l=20n nfin=2
+MM7 Y net25 VSS VSS nmos_lvt l=20n nfin=4
+MM6 net11 B VSS VSS nmos_lvt l=20n nfin=2
+MM5 net25 A2 net11 VSS nmos_lvt l=20n nfin=2
+MM4 net25 A1 net11 VSS nmos_lvt l=20n nfin=2
+.ENDS
+
+
+.SUBCKT OA22x1 A1 A2 B1 B2 VDD VSS Y
+MM8 net18 B2 net042 VDD pmos_lvt l=20n nfin=2
+MM7 net18 A2 net043 VDD pmos_lvt l=20n nfin=2
+MM9 net042 B1 VDD VDD pmos_lvt l=20n nfin=2
+MM1 Y net18 VDD VDD pmos_lvt l=20n nfin=2
+MM6 net043 A1 VDD VDD pmos_lvt l=20n nfin=2
+MM17 net18 B1 net034 VSS nmos_lvt l=20n nfin=2
+MM14 net034 A1 VSS VSS nmos_lvt l=20n nfin=2
+MM16 net18 B2 net034 VSS nmos_lvt l=20n nfin=2
+MM15 net034 A2 VSS VSS nmos_lvt l=20n nfin=2
+MM0 Y net18 VSS VSS nmos_lvt l=20n nfin=2
+.ENDS
+
+
+.SUBCKT OA22x2 A1 A2 B1 B2 VDD VSS Y
+MM9 Y net033 VSS VSS nmos_lvt l=20n nfin=4
+MM3 net3 B2 VSS VSS nmos_lvt l=20n nfin=2
+MM2 net033 A2 net3 VSS nmos_lvt l=20n nfin=2
+MM1 net3 B1 VSS VSS nmos_lvt l=20n nfin=2
+MM0 net033 A1 net3 VSS nmos_lvt l=20n nfin=2
+MM8 net13 A1 VDD VDD pmos_lvt l=20n nfin=2
+MM11 net033 A2 net13 VDD pmos_lvt l=20n nfin=2
+MM6 net14 B1 VDD VDD pmos_lvt l=20n nfin=2
+MM5 Y net033 VDD VDD pmos_lvt l=20n nfin=4
+MM10 net033 B2 net14 VDD pmos_lvt l=20n nfin=2
+.ENDS

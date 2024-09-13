@@ -55,8 +55,8 @@ add_cell -n INVx1 -l INV -i A -o Y -f Y=!A
 add_slope slope1 
 add_load  load1
 add_area 1
-add_netlist HUAZI/INV.cdl
-add_model HUAZI/MODEL/model_TT.sp
+add_netlist HW/INV.cdl
+add_model HW/MODEL/model_TT.sp
 add_simulation_timestep auto slope1
 
 @REM ## add circuit
@@ -64,8 +64,8 @@ add_simulation_timestep auto slope1
 @REM add_slope slope1 
 @REM add_load  load1 
 @REM add_area 1
-@REM add_netlist HUAZI/INV.cdl
-@REM add_model HUAZI/MODEL/model_TT.sp
+@REM add_netlist HW/INV.cdl
+@REM add_model HW/MODEL/model_TT.sp
 @REM add_simulation_timestep auto slope1
 
 @REM ## add circuit
@@ -74,8 +74,8 @@ add_simulation_timestep auto slope1
 @REM add_load  load2  
 @REM add_clock_slope auto slope1
 @REM add_area 1
-@REM add_netlist HUAZI/Sequential.cdl
-@REM add_model HUAZI/MODEL/model_TT.sp
+@REM add_netlist HW/Sequential.cdl
+@REM add_model HW/MODEL/model_TT.sp
 @REM add_simulation_setup_lowest -0.2
 @REM add_simulation_setup_highest 0
 @REM add_simulation_setup_timestep 0.002
